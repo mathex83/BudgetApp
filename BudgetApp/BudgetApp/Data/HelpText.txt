@@ -1,0 +1,7 @@
+﻿Add-Migration i -OutputDir "Data/Migrations"
+
+Remove-Migration
+
+update-database
+
+dotnet tool update --global dotnet-ef --version 5.0.13
