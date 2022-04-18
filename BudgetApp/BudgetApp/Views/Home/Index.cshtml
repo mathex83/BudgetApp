@@ -3,9 +3,6 @@
 }
 
 <div class="text-center">
-    <a asp-action="Index" class="btn btn-primary btn-contentselect">Home</a>
-    <a asp-action="Privacy" class="btn btn-primary btn-contentselect">Privacy</a>
-
-   @* <a asp-action="Index"><div class="btn btn-primary btn-contentselect">Home</div></a>
-    <a asp-action="Privacy"><div class="btn btn-primary btn-contentselect">Privacy</div></a>*@
+    <a asp-controller="Categories" asp-action="CategoryList" class="btn btn-primary btn-contentselect">Kategori</a>
+    <a asp-controller="Subcategories" asp-action="SubcategoryList" class="btn btn-primary btn-contentselect">Under-<br />kategori</a>
 </div>
