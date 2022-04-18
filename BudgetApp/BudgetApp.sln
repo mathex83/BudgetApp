@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp", "BudgetApp\BudgetApp.csproj", "{86D7373E-974B-4CB0-A21D-BC780984670C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetApp", "BudgetApp\BudgetApp.csproj", "{86D7373E-974B-4CB0-A21D-BC780984670C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
