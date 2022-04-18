@@ -1,0 +1,6 @@
+﻿//Should be run in Package Manager Console!
+PM>
+Add-Migration initial -OutputDir "Data/Migrations"
+
+PM>
+update-database
