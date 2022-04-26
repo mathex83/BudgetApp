@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetApp.Data.Migrations
 {
     [DbContext(typeof(BudgetAppContext))]
-    [Migration("20220418140515_initial")]
+    [Migration("20220425190700_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,25 @@ namespace BudgetApp.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BudgetApp.Models.Account", b =>
+                {
+                    b.Property<int>("AccountID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountID"), 1L, 1);
+
+                    b.Property<double>("AccountBalance")
+                        .HasColumnType("float");
+
+                    b.Property<string>("AccountName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AccountID");
+
+                    b.ToTable("Account");
+                });
 
             modelBuilder.Entity("BudgetApp.Models.Category", b =>
                 {
@@ -34,18 +53,39 @@ namespace BudgetApp.Data.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CategoryTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("CategoryId");
+
+                    b.HasIndex("CategoryTypeId");
 
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("BudgetApp.Models.Subcategory", b =>
+            modelBuilder.Entity("BudgetApp.Models.CategoryType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryTypeId"), 1L, 1);
+
+                    b.Property<string>("CategoryTypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryTypeId");
+
+                    b.ToTable("CategoryType");
+                });
+
+            modelBuilder.Entity("BudgetApp.Models.Subcategory", b =>
+                {
+                    b.Property<int>("SubcategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubcategoryId"), 1L, 1);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -53,11 +93,22 @@ namespace BudgetApp.Data.Migrations
                     b.Property<string>("SubcategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SubcategoryId");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Subcategory");
+                });
+
+            modelBuilder.Entity("BudgetApp.Models.Category", b =>
+                {
+                    b.HasOne("BudgetApp.Models.CategoryType", "CategoryType")
+                        .WithMany("Categories")
+                        .HasForeignKey("CategoryTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoryType");
                 });
 
             modelBuilder.Entity("BudgetApp.Models.Subcategory", b =>
@@ -74,6 +125,11 @@ namespace BudgetApp.Data.Migrations
             modelBuilder.Entity("BudgetApp.Models.Category", b =>
                 {
                     b.Navigation("Subcategories");
+                });
+
+            modelBuilder.Entity("BudgetApp.Models.CategoryType", b =>
+                {
+                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }
