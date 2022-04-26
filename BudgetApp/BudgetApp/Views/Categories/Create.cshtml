@@ -1,29 +1,32 @@
 ﻿@model BudgetApp.Models.Category
+@*Set the language*@
+@{LanguageControl l = new LanguageControl("DK");}
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h4>Category</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CategoryName" class="control-label"></label>
+                <label asp-for="CategoryTypeId" class="control-label">@l.CategoryTypeName</label>
+                <select asp-for="CategoryTypeId" class ="form-control" asp-items="ViewBag.CategoryTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label">@l.CategoryName</label>
                 <input asp-for="CategoryName" class="form-control" />
                 <span asp-validation-for="CategoryName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value=@l.CreateButton class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="CategoryList">Back to List</a>
+    <a asp-action="CategoryList">
+        <img src="~/img/bootstrap-icons-1.8.1/arrow-left.svg" aria-hidden="true"/> 
+        @l.BackToList
+    </a>
 </div>
 
 @section Scripts {
