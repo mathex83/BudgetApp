@@ -1,21 +1,16 @@
 ﻿@model IEnumerable<BudgetApp.Models.Subcategory>
+@{LanguageControl l = new LanguageControl("DK");}
 
-@{
-    ViewData["Title"] = "SubcategoryList";
-}
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@l.CreateNewButton</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubcategoryName)
-            </th>
+            <th>@l.CategoryTypeName</th>
+            <th>@l.CategoryName</th>
+            <th>@l.SubCategoryName</th>
             <th></th>
         </tr>
     </thead>
@@ -23,19 +18,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryType.CategoryTypeName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SubcategoryName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.SubcategoryId">
+                    <img src="~/img/bootstrap-icons-1.8.1/pencil.svg" aria-hidden="true"/>
+                     @*@l.EditButton*@
+                </a> |
+                 <a asp-action="Delete" asp-route-id="@item.SubcategoryId">
+                     <img src="~/img/bootstrap-icons-1.8.1/trash3.svg" aria-hidden="true"/>
+                     @*@l.DeleteButton*@
+                 </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-<div>
-    <a asp-controller="Home" asp-action="Index">Tilbage</a>
-</div>
