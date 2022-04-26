@@ -13,6 +13,7 @@ namespace BudgetApp.Controllers
     public class CategoriesController : Controller
     {
         private readonly BudgetAppContext _context;
+        private readonly string modelName = "Category";
 
         public CategoriesController(BudgetAppContext context)
         {
@@ -22,12 +23,24 @@ namespace BudgetApp.Controllers
         // GET: Categories
         public async Task<IActionResult> CategoryList()
         {
-            return View(await _context.Category.ToListAsync());
+            var budgetAppContext = _context.Category.Include(sc => sc.CategoryType);
+            List<Category> categories = await budgetAppContext.ToListAsync();
+            //await _context.Category.ToListAsync();
+            categories = categories
+                .OrderByDescending(ct => ct.CategoryType.CategoryTypeId)
+                .ThenBy(c => c.CategoryId).ToList();
+            ViewData["Title"] = modelName + "-list";
+            return View(categories);
         }
 
         // GET: Categories/Create
         public IActionResult Create()
         {
+            ViewData["CategoryTypeId"] = new SelectList(
+                _context.CategoryType, 
+                "CategoryTypeId",
+                "CategoryTypeName");
+            ViewData["Title"] = "Create new " + modelName;
             return View();
         }
 
@@ -36,7 +49,8 @@ namespace BudgetApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Create(
+            [Bind("CategoryId,CategoryName,CategoryTypeId")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -44,12 +58,18 @@ namespace BudgetApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(CategoryList));
             }
+            ViewData["CategoryTypeId"] = new SelectList(
+                _context.CategoryType,
+                "CategoryTypeId",
+                "CategoryTypeName",
+                category.CategoryTypeId);
             return View(category);
         }
 
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewData["Title"] = "Edit " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -60,6 +80,11 @@ namespace BudgetApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryTypeId"] = new SelectList(
+                _context.CategoryType,
+                "CategoryTypeId",
+                "CategoryTypeName",
+                category.CategoryTypeId);
             return View(category);
         }
 
@@ -68,7 +93,9 @@ namespace BudgetApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Edit(
+            int id, 
+            [Bind("CategoryId,CategoryName,CategoryTypeId")] Category category)
         {
             if (id != category.CategoryId)
             {
@@ -95,19 +122,26 @@ namespace BudgetApp.Controllers
                 }
                 return RedirectToAction(nameof(CategoryList));
             }
+            ViewData["CategoryTypeId"] = new SelectList(
+                _context.CategoryType,
+                "CategoryTypeId",
+                "CategoryTypeName",
+                category.CategoryTypeId);
             return View(category);
         }
 
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewData["Title"] = "Delete " + modelName;
             if (id == null)
             {
                 return NotFound();
             }
 
             var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
+                .Include(c => c.CategoryType)
+                .FirstOrDefaultAsync(c => c.CategoryId == id);
             if (category == null)
             {
                 return NotFound();

@@ -8,10 +8,15 @@ namespace BudgetApp.Models
         [Key]
         public int CategoryId { get; set; }
 
-        [Display(Name ="Kategori")]
         public string CategoryName { get; set; }
 
-
+        #region SubCategory Many-end
         public ICollection<Subcategory> Subcategories { get; set; }
+        #endregion
+
+        #region CategoryType One-end
+        public int CategoryTypeId { get; set; }
+        public CategoryType CategoryType { get; set; }
+        #endregion
     }
 }

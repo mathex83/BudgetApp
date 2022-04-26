@@ -5,12 +5,15 @@ namespace BudgetApp.Models
     public class Subcategory
     {
         [Key]
-        public int Id { get; set; }
+        public int SubcategoryId { get; set; }
 
-        [Display(Name = "Underkategori")]
         public string SubcategoryName { get; set; }
 
+
+        #region SubCategory one-end
         public int CategoryId { get; set; }
+
         public Category Category { get; set; }
+        #endregion
     }
 }

@@ -1,35 +1,32 @@
 ﻿@model BudgetApp.Models.Subcategory
+@*Set the language*@
+@{LanguageControl l = new LanguageControl("DK");}
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Subcategory</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SubcategoryName" class="control-label"></label>
-                <input asp-for="SubcategoryName" class="form-control" />
-                <span asp-validation-for="SubcategoryName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
+                <label asp-for="CategoryId" class="control-label">@l.CategoryName</label>
                 <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="SubcategoryName" class="control-label">@l.SubCategoryName</label>
+                <input asp-for="SubcategoryName" class="form-control" />
+                <span asp-validation-for="SubcategoryName" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value=@l.CreateButton class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="SubcategoryList">Back to List</a>
+    <a asp-action="SubcategoryList">
+        <img src="~/img/bootstrap-icons-1.8.1/arrow-left.svg" aria-hidden="true"/> 
+        @l.BackToList
+    </a>
 </div>
 
 @section Scripts {

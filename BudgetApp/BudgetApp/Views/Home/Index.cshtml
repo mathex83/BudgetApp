@@ -1,8 +1,84 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@{LanguageControl l = new LanguageControl("DK");}
+@{
+    ViewData["Title"] = @l.HomeButton;
 }
 
-<div class="text-center">
-    <a asp-controller="Categories" asp-action="CategoryList" class="btn btn-primary btn-contentselect">Kategori</a>
-    <a asp-controller="Subcategories" asp-action="SubcategoryList" class="btn btn-primary btn-contentselect">Under-<br />kategori</a>
-</div>
+1<img src="~/img/bootstrap-icons-1.8.1/coin.svg" aria-hidden="true"/>
+ 2<img src="~/img/bootstrap-icons-1.8.1/cash.svg" aria-hidden="true"/>
+ 3<img src="~/img/bootstrap-icons-1.8.1/cash-coin.svg" aria-hidden="true"/>
+ 4<img src="~/img/bootstrap-icons-1.8.1/cash-stack.svg" aria-hidden="true"/>
+ 5<img src="~/img/bootstrap-icons-1.8.1/credit-card.svg" aria-hidden="true"/>
+ 6<img src="~/img/bootstrap-icons-1.8.1/credit-card-fill.svg" aria-hidden="true"/>
+ 7<img src="~/img/bootstrap-icons-1.8.1/credit-card-2-back.svg" aria-hidden="true"/>
+ 8<img src="~/img/bootstrap-icons-1.8.1/credit-card-2-back-fill.svg" aria-hidden="true"/>
+ 9<img src="~/img/bootstrap-icons-1.8.1/credit-card-2-front.svg" aria-hidden="true"/>
+ 10<img src="~/img/bootstrap-icons-1.8.1/credit-card-2-front-fill.svg" aria-hidden="true"/>
+ 11<img src="~/img/bootstrap-icons-1.8.1/bank.svg" aria-hidden="true"/>
+ 12<img src="~/img/bootstrap-icons-1.8.1/bank2.svg" aria-hidden="true"/>
+ 13<img src="~/img/bootstrap-icons-1.8.1/piggy-bank.svg" aria-hidden="true"/>
+ 14<img src="~/img/bootstrap-icons-1.8.1/piggy-bank-fill.svg" aria-hidden="true"/>
+ 15<img src="~/img/bootstrap-icons-1.8.1/bar-chart.svg" aria-hidden="true"/>
+ 16<img src="~/img/bootstrap-icons-1.8.1/bar-chart-fill.svg" aria-hidden="true"/>
+ 17<img src="~/img/bootstrap-icons-1.8.1/bar-chart-steps.svg" aria-hidden="true"/>
+ 18<img src="~/img/bootstrap-icons-1.8.1/bar-chart-line.svg" aria-hidden="true"/>
+ 19<img src="~/img/bootstrap-icons-1.8.1/bar-chart-line-fill.svg" aria-hidden="true"/>
+ 20<img src="~/img/bootstrap-icons-1.8.1/calculator.svg" aria-hidden="true"/>
+ 21<img src="~/img/bootstrap-icons-1.8.1/calculator-fill.svg" aria-hidden="true"/>
+ 22<img src="~/img/bootstrap-icons-1.8.1/currency-bitcoin.svg" aria-hidden="true"/>
+ 23<img src="~/img/bootstrap-icons-1.8.1/currency-dollar.svg" aria-hidden="true"/>
+ 24<img src="~/img/bootstrap-icons-1.8.1/currency-euro.svg" aria-hidden="true"/>
+ 25<img src="~/img/bootstrap-icons-1.8.1/currency-exchange.svg" aria-hidden="true"/>
+ 26<img src="~/img/bootstrap-icons-1.8.1/currency-pound.svg" aria-hidden="true"/>
+ 27<img src="~/img/bootstrap-icons-1.8.1/currency-yen.svg" aria-hidden="true"/>
+ 28<img src="~/img/bootstrap-icons-1.8.1/download.svg" aria-hidden="true"/>
+ 29<img src="~/img/bootstrap-icons-1.8.1/filetype-csv.svg" aria-hidden="true"/>
+ 30<img src="~/img/bootstrap-icons-1.8.1/graph-down.svg" aria-hidden="true"/>
+ 31<img src="~/img/bootstrap-icons-1.8.1/graph-down-arrow.svg" aria-hidden="true"/>
+ 32<img src="~/img/bootstrap-icons-1.8.1/graph-up.svg" aria-hidden="true"/>
+ 33<img src="~/img/bootstrap-icons-1.8.1/graph-up-arrow.svg" aria-hidden="true"/>
+ 34<img src="~/img/bootstrap-icons-1.8.1/list.svg" aria-hidden="true"/>
+ 35<img src="~/img/bootstrap-icons-1.8.1/list-check.svg" aria-hidden="true"/>
+ 36<img src="~/img/bootstrap-icons-1.8.1/list-columns.svg" aria-hidden="true"/>
+ 37<img src="~/img/bootstrap-icons-1.8.1/list-columns-reverse.svg" aria-hidden="true"/>
+ 38<img src="~/img/bootstrap-icons-1.8.1/list-nested.svg" aria-hidden="true"/>
+ 39<img src="~/img/bootstrap-icons-1.8.1/list-ol.svg" aria-hidden="true"/>
+ 40<img src="~/img/bootstrap-icons-1.8.1/list-stars.svg" aria-hidden="true"/>
+ 41<img src="~/img/bootstrap-icons-1.8.1/list-task.svg" aria-hidden="true"/>
+ 42<img src="~/img/bootstrap-icons-1.8.1/list-ul.svg" aria-hidden="true"/>
+ 43<img src="~/img/bootstrap-icons-1.8.1/pen.svg" aria-hidden="true"/>
+ 44<img src="~/img/bootstrap-icons-1.8.1/pen-fill.svg" aria-hidden="true"/>
+ 45<img src="~/img/bootstrap-icons-1.8.1/pencil.svg" aria-hidden="true"/>
+ 46<img src="~/img/bootstrap-icons-1.8.1/pencil-fill.svg" aria-hidden="true"/>
+ 47<img src="~/img/bootstrap-icons-1.8.1/pencil-square.svg" aria-hidden="true"/>
+ 48<img src="~/img/bootstrap-icons-1.8.1/percent.svg" aria-hidden="true"/>
+ 49<img src="~/img/bootstrap-icons-1.8.1/suit-club.svg" aria-hidden="true"/>
+ 50<img src="~/img/bootstrap-icons-1.8.1/suit-club-fill.svg" aria-hidden="true"/>
+ 51<img src="~/img/bootstrap-icons-1.8.1/suit-diamond.svg" aria-hidden="true"/>
+ 52<img src="~/img/bootstrap-icons-1.8.1/suit-diamond-fill.svg" aria-hidden="true"/>
+ 53<img src="~/img/bootstrap-icons-1.8.1/suit-heart.svg" aria-hidden="true"/>
+ 54<img src="~/img/bootstrap-icons-1.8.1/suit-heart-fill.svg" aria-hidden="true"/>
+ 55<img src="~/img/bootstrap-icons-1.8.1/suit-spade.svg" aria-hidden="true"/>
+ 56<img src="~/img/bootstrap-icons-1.8.1/suit-spade-fill.svg" aria-hidden="true"/>
+ 57<img src="~/img/bootstrap-icons-1.8.1/table.svg" aria-hidden="true"/>
+ 58<img src="~/img/bootstrap-icons-1.8.1/trash.svg" aria-hidden="true"/>
+ 59<img src="~/img/bootstrap-icons-1.8.1/trash-fill.svg" aria-hidden="true"/>
+ 60<img src="~/img/bootstrap-icons-1.8.1/trash2.svg" aria-hidden="true"/>
+ 61<img src="~/img/bootstrap-icons-1.8.1/trash2-fill.svg" aria-hidden="true"/>
+ 62<img src="~/img/bootstrap-icons-1.8.1/trash3.svg" aria-hidden="true"/>
+ 63<img src="~/img/bootstrap-icons-1.8.1/trash3-fill.svg" aria-hidden="true"/>
+ 64<img src="~/img/bootstrap-icons-1.8.1/wallet.svg" aria-hidden="true"/>
+ 65<img src="~/img/bootstrap-icons-1.8.1/wallet-fill.svg" aria-hidden="true"/>
+ 66<img src="~/img/bootstrap-icons-1.8.1/wallet2.svg" aria-hidden="true"/>
+ 67<img src="~/img/bootstrap-icons-1.8.1/watch.svg" aria-hidden="true"/>
+ 68<img src="~/img/bootstrap-icons-1.8.1/wrench.svg" aria-hidden="true"/>
+ 69<img src="~/img/bootstrap-icons-1.8.1/wrench-adjustable.svg" aria-hidden="true"/>
+ 70<img src="~/img/bootstrap-icons-1.8.1/wrench-adjustable-circle.svg" aria-hidden="true"/>
+ 71<img src="~/img/bootstrap-icons-1.8.1/wrench-adjustable-circle-fill.svg" aria-hidden="true"/>
+ 72<img src="~/img/bootstrap-icons-1.8.1/gear.svg" aria-hidden="true"/>
+ 73<img src="~/img/bootstrap-icons-1.8.1/gear-fill.svg" aria-hidden="true"/>
+ 74<img src="~/img/bootstrap-icons-1.8.1/gear-wide.svg" aria-hidden="true"/>
+ 75<img src="~/img/bootstrap-icons-1.8.1/gear-wide-connected.svg" aria-hidden="true"/>
+ 76<img src="~/img/bootstrap-icons-1.8.1/tag.svg" aria-hidden="true"/>
+ 77<img src="~/img/bootstrap-icons-1.8.1/tag-fill.svg" aria-hidden="true"/>
+ 78<img src="~/img/bootstrap-icons-1.8.1/tags.svg" aria-hidden="true"/>
+ 79<img src="~/img/bootstrap-icons-1.8.1/tags-fill.svg" aria-hidden="true"/>

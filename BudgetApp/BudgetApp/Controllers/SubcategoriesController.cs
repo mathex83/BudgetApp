@@ -13,6 +13,7 @@ namespace BudgetApp.Controllers
     public class SubcategoriesController : Controller
     {
         private readonly BudgetAppContext _context;
+        private readonly string modelName = "Sub-category";
 
         public SubcategoriesController(BudgetAppContext context)
         {
@@ -22,14 +23,26 @@ namespace BudgetApp.Controllers
         // GET: Subcategories
         public async Task<IActionResult> SubcategoryList()
         {
-            var budgetAppContext = _context.Subcategory.Include(s => s.Category);
-            return View(await budgetAppContext.ToListAsync());
+            var budgetAppContext = _context.Subcategory.Include(sc => sc.Category)
+                .ThenInclude(cat => cat.CategoryType);
+            List<Subcategory> subcategories = await budgetAppContext.ToListAsync();
+            subcategories = subcategories
+                .OrderByDescending(sc => sc.Category.CategoryType.CategoryTypeId)
+                .ThenBy(sc => sc.Category.CategoryId)
+                .ThenBy(sc => sc.SubcategoryName)
+                .ToList();
+            ViewData["Title"] = modelName + "-list";
+            return View(subcategories);
         }
 
         // GET: Subcategories/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
+            ViewData["CategoryId"] = new SelectList(
+                _context.Category, 
+                "CategoryId", 
+                "CategoryName");
+            ViewData["Title"] = "Create new " + modelName;
             return View();
         }
 
@@ -38,7 +51,8 @@ namespace BudgetApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubcategoryName,CategoryId")] Subcategory subcategory)
+        public async Task<IActionResult> Create(
+            [Bind("SubcategoryId,SubcategoryName,CategoryId")] Subcategory subcategory)
         {
             if (ModelState.IsValid)
             {
@@ -46,13 +60,18 @@ namespace BudgetApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(SubcategoryList));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", subcategory.CategoryId);
+            ViewData["CategoryId"] = new SelectList(
+                _context.Category, 
+                "CategoryId", 
+                "CategoryName", 
+                subcategory.CategoryId);
             return View(subcategory);
         }
 
         // GET: Subcategories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewData["Title"] = "Edit " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -63,7 +82,11 @@ namespace BudgetApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", subcategory.CategoryId);
+            ViewData["CategoryId"] = new SelectList(
+                _context.Category,
+                "CategoryId",
+                "CategoryName",
+                subcategory.CategoryId);
             return View(subcategory);
         }
 
@@ -72,9 +95,11 @@ namespace BudgetApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SubcategoryName,CategoryId")] Subcategory subcategory)
+        public async Task<IActionResult> Edit(
+            int id, 
+            [Bind("SubcategoryId,SubcategoryName,CategoryId")] Subcategory subcategory)
         {
-            if (id != subcategory.Id)
+            if (id != subcategory.SubcategoryId)
             {
                 return NotFound();
             }
@@ -88,7 +113,7 @@ namespace BudgetApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubcategoryExists(subcategory.Id))
+                    if (!SubcategoryExists(subcategory.SubcategoryId))
                     {
                         return NotFound();
                     }
@@ -99,13 +124,18 @@ namespace BudgetApp.Controllers
                 }
                 return RedirectToAction(nameof(SubcategoryList));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", subcategory.CategoryId);
+            ViewData["CategoryId"] = new SelectList(
+                _context.Category, 
+                "CategoryId", 
+                "CategoryName", 
+                subcategory.CategoryId);
             return View(subcategory);
         }
 
         // GET: Subcategories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewData["Title"] = "Delete " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -113,7 +143,7 @@ namespace BudgetApp.Controllers
 
             var subcategory = await _context.Subcategory
                 .Include(s => s.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(s => s.SubcategoryId == id);
             if (subcategory == null)
             {
                 return NotFound();
@@ -135,7 +165,7 @@ namespace BudgetApp.Controllers
 
         private bool SubcategoryExists(int id)
         {
-            return _context.Subcategory.Any(e => e.Id == id);
+            return _context.Subcategory.Any(e => e.SubcategoryId == id);
         }
     }
 }

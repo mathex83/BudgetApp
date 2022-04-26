@@ -1,0 +1,24 @@
+﻿DROP TABLE IF EXISTS DimDate;
+CREATE TABLE DimDate(	
+    DateIso DATE PRIMARY KEY,
+	DateDK AS CONVERT(NVARCHAR(20), DateIso, 105),
+    WeekInt AS DATEPART(ISO_WEEK,DateIso),
+	YearInt INT NOT NULL,
+	QuarterInt AS DATEPART(QUARTER,DateIso),
+    MonthInt INT NOT NULL,
+    DayInt INT NOT NULL,
+	--DayNameEN AS CONVERT(NVARCHAR(10),DATENAME(WEEKDAY,DateIso),103),
+    --DayNameDK AS CONVERT(NVARCHAR(10),DATENAME(WEEKDAY,DateIso),111),
+	DayOfWeekInt AS DATEPART(WEEKDAY,DateIso)
+);
+
+DECLARE @currentDate DATE = '2000-01-01';
+DECLARE @numYears INT = 200;
+DECLARE @endDate DATE = DATEADD(YY, @numYears, DATEADD(dd, -1, @currentDate));
+
+WHILE @currentDate <= @endDate
+    BEGIN
+        INSERT INTO DimDate (DateIso,YearInt,MonthInt,DayInt)
+			SELECT @currentDate, YEAR(@currentDate), MONTH(@currentDate), DAY(@currentDate);
+        SET @currentDate = DATEADD(dd, 1, @currentDate);
+    END;
