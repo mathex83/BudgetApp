@@ -1,6 +1,8 @@
 ﻿//Should be run in Package Manager Console!
 PM>
 Add-Migration initial -OutputDir "Data/Migrations"
+EntityFrameworkCore\Add-Migration init -OutputDir "Data\Migrations"
 
 PM>
 update-database
+EntityFrameworkCore\Update-Database
