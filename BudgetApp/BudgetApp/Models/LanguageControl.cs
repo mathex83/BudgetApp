@@ -18,6 +18,8 @@
         public string BudgetCreateButton { get; set; }
         public string BudgetViewButton { get; set; }
         public string CurrencyText { get; set; }
+        public string CSVButton { get; set; }
+        public string BankButton { get; set; }
 
         public LanguageControl(string lang)
         {
@@ -40,6 +42,8 @@
                     BudgetCreateButton = "Opret nyt budget";
                     BudgetViewButton = "Budget-oversigt";
                     CurrencyText = "DKK";
+                    BankButton = "Hent kontoudskrift";
+                    CSVButton = ".csv-fil";
                     break;
                 case "UK":
                     HomeButton = "Home";
@@ -58,6 +62,8 @@
                     BudgetCreateButton = "Create new budget";
                     BudgetViewButton = "Budget view";
                     CurrencyText = "£";
+                    BankButton = "Load transaction-file";
+                    CSVButton = ".csv-file";
                     break;
                 default:
                     HomeButton = "Home";
@@ -76,6 +82,8 @@
                     BudgetCreateButton = "Create new budget";
                     BudgetViewButton = "Budget view";
                     CurrencyText = "$";
+                    BankButton = "Load transaction-file";
+                    CSVButton = ".csv-file";
                     break;
             }
         }

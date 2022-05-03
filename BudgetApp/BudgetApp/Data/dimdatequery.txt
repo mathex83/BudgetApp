@@ -1,24 +1,48 @@
 ﻿DROP TABLE IF EXISTS DimDate;
+GO
+
 CREATE TABLE DimDate(	
-    DateIso DATE PRIMARY KEY,
-	DateDK AS CONVERT(NVARCHAR(20), DateIso, 105),
-    WeekInt AS DATEPART(ISO_WEEK,DateIso),
-	YearInt INT NOT NULL,
-	QuarterInt AS DATEPART(QUARTER,DateIso),
-    MonthInt INT NOT NULL,
-    DayInt INT NOT NULL,
-	--DayNameEN AS CONVERT(NVARCHAR(10),DATENAME(WEEKDAY,DateIso),103),
-    --DayNameDK AS CONVERT(NVARCHAR(10),DATENAME(WEEKDAY,DateIso),111),
-	DayOfWeekInt AS DATEPART(WEEKDAY,DateIso)
+DateIso DATE PRIMARY KEY,
+DateDK AS CONVERT(NVARCHAR(20), DateIso, 105),
+WeekInt AS DATEPART(ISO_WEEK,DateIso),
+YearInt AS DATEPART(YYYY,DateIso),
+QuarterInt AS DATEPART(QUARTER,DateIso),
+MonthInt AS DATEPART(MM,DateIso),
+DayInt AS DATEPART(dd,DateIso),
+DayNameEN AS CONVERT(NVARCHAR(10),DATENAME(dw,DateIso),103),
+DayNameDK NVARCHAR(7) null,
+DayOfWeekInt INT null
 );
+GO
 
-DECLARE @currentDate DATE = '2000-01-01';
-DECLARE @numYears INT = 200;
-DECLARE @endDate DATE = DATEADD(YY, @numYears, DATEADD(dd, -1, @currentDate));
+DECLARE @dateIterator DATE = '1949-12-31';
+DECLARE @numYears INT = 250;
+DECLARE @endDate DATE = DATEADD(YY, @numYears, @dateIterator);
 
-WHILE @currentDate <= @endDate
-    BEGIN
-        INSERT INTO DimDate (DateIso,YearInt,MonthInt,DayInt)
-			SELECT @currentDate, YEAR(@currentDate), MONTH(@currentDate), DAY(@currentDate);
-        SET @currentDate = DATEADD(dd, 1, @currentDate);
-    END;
+WHILE @dateIterator <= @endDate
+BEGIN
+INSERT INTO DimDate(DateIso)
+SELECT @dateIterator;
+SET @dateIterator = DATEADD(dd, 1, @dateIterator);
+END;
+
+UPDATE DimDate SET DayNameDK='mandag', DayOfWeekInt=1 WHERE DayNameEN LIKE '_onday';
+UPDATE DimDate SET DayNameDK='tirsdag', DayOfWeekInt=2 WHERE DayNameEN LIKE '_uesday';
+UPDATE DimDate SET DayNameDK='onsdag', DayOfWeekInt=3 WHERE DayNameEN LIKE '_ednesday';
+UPDATE DimDate SET DayNameDK='torsdag', DayOfWeekInt=4 WHERE DayNameEN LIKE '_hursday';
+UPDATE DimDate SET DayNameDK='fredag', DayOfWeekInt=5 WHERE DayNameEN LIKE '_riday';
+UPDATE DimDate SET DayNameDK='lørdag', DayOfWeekInt=6 WHERE DayNameEN LIKE '_aturday';
+UPDATE DimDate SET DayNameDK='søndag', DayOfWeekInt=7 WHERE DayNameEN LIKE '_unday';
+
+--SELECT * FROM DimDate WHERE DateIso BETWEEN '2022-03-31' AND '2022-05-01';
+--SELECT * FROM DimDate WHERE DateIso BETWEEN '1949-12-31' AND '1950-05-01';
+--SELECT COUNT(DayOfWeekInt) AS [RowCount] FROM DimDate;
+
+
+
+
+TimeOfDay AS CASE 
+WHEN [Timestamp] BETWEEN '06:00:00' AND '11:59:59' THEN 'Morning'
+WHEN [Timestamp] BETWEEN '12:00:00' AND '17:59:59' THEN 'Afternoon'
+WHEN [Timestamp] BETWEEN '18:00:00' AND '23:59:59' THEN 'Evening'
+ELSE 'Night'

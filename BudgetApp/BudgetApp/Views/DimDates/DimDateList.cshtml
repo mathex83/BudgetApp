@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BudgetApp.Models.DimDate>
+
+@{
+    ViewData["Title"] = "DimDateList";
+}
+
+<h1>DimDateList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateISO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateDK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekInt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearInt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuarterInt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonthInt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayInt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayNameEN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayNameDK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayOfWeekInt)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateISO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekInt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearInt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuarterInt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonthInt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayInt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayNameEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayNameDK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayOfWeekInt)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

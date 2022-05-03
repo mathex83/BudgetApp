@@ -25,12 +25,16 @@
                     <ul class="navbar-nav flex-grow-1">
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <img src="~/img/bootstrap-icons-1.8.1/cash-coin.svg" aria-hidden="true"/>
                              @l.BudgetButton 
                             </a>
                             <div class="dropdown-menu darker-bg" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="DimDates" asp-action="DimDateList">
+                                    <img src="~/img/bootstrap-icons-1.8.1/calendar-check.svg" aria-hidden="true"/>
+                                     Dates
+                                </a>
                                 <a class="dropdown-item" data-bs-toggle="dropdown" @*asp-controller="Categories" asp-action="CategoryList"*@>
                                     <img src="~/img/bootstrap-icons-1.8.1/calculator.svg" aria-hidden="true"/>
                                      @l.BudgetCreateButton
@@ -42,7 +46,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <img src="~/img/bootstrap-icons-1.8.1/gear.svg" aria-hidden="true"/>
                              @l.SettingsButton 
@@ -58,13 +62,26 @@
                                 </a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img src="~/img/bootstrap-icons-1.8.1/bank.svg" aria-hidden="true"/>
+                             @l.BankButton 
+                            </a>
+                            <div class="dropdown-menu darker-bg" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="CSV_model" asp-action="CSVlist">
+                                    <img src="~/img/bootstrap-icons-1.8.1/filetype-csv.svg" aria-hidden="true"/>
+                                     @l.CSVButton
+                                </a>
+                            </div>
+                        </li>
 
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container bg-transparent m-0">
+    <div class="container bg-transparent">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
