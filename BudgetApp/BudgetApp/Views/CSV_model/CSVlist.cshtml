@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BudgetApp.Models.CSV_loader.CSV_model>
+
+@{
+    ViewData["Title"] = "CSVlist";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Bogføringsdato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beskrivelse)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Afsender)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Modtager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Navn)
+            </th class="text-right">
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Beløb)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Saldo)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Valuta)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Bogføringsdato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beskrivelse)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Afsender)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Modtager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Navn)
+            </td>           
+            <td class="text-right 
+                @( item.Beløb > 0? "text-forest" : item.Beløb == 0? "text-black" : "text-red")">
+                @Html.DisplayFor(modelItem => item.Beløb)
+            </td>
+            <td class="text-right
+                @( item.Saldo > 0? "text-forest" : item.Saldo == 0? "text-black" : "text-red")">
+                @Html.DisplayFor(modelItem => item.Saldo)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Valuta)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
