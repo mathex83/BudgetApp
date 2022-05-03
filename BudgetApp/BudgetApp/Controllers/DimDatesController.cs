@@ -23,7 +23,7 @@ namespace BudgetApp.Controllers
         public async Task<IActionResult> DimDateList()
         {
             List<DimDate> datesList = await _context.DimDate.ToListAsync();
-            datesList = datesList.Skip(18262).Take(10959).ToList();
+            datesList = datesList.Skip(18263).Take(18263).ToList();
             return View(datesList);
         }        
     }
