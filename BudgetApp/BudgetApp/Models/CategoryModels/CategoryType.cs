@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BudgetApp.Models
+namespace BudgetApp.Models.CategoryModels
 {
     public class CategoryType
     {
@@ -9,7 +9,7 @@ namespace BudgetApp.Models
         public int CategoryTypeId { get; set; }
         public string CategoryTypeName { get; set; }
 
-        #region Category Many-end
+        #region CategoryCategoryTypeId Primary-end
         public ICollection<Category> Categories { get; set; }
         #endregion
     }

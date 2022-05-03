@@ -4,42 +4,37 @@
     ViewData["Title"] = "DimDateList";
 }
 
-<h1>DimDateList</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.DateISO)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.DateDK)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.WeekInt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.YearInt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.QuarterInt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.MonthInt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.DayInt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.DayNameEN)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.DayNameDK)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.DayOfWeekInt)
             </th>
         </tr>
@@ -53,28 +48,28 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateDK)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.WeekInt)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.YearInt)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.QuarterInt)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.MonthInt)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.DayInt)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.DayNameEN)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.DayNameDK)
             </td>
-            <td>
+            <td class="text-center">
                 @Html.DisplayFor(modelItem => item.DayOfWeekInt)
             </td>
         </tr>

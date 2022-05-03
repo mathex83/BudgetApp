@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudgetApp.Data;
 using BudgetApp.Models;
+using BudgetApp.Models.CategoryModels;
 
 namespace BudgetApp.Controllers
 {

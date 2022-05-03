@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BudgetApp.Models.Account>
+@*Set the language*@
+@{LanguageControl l = new LanguageControl("DK");}
+
+@{
+    ViewData["Title"] = "AccountList";
+}
+
+<p>
+    <a asp-action="Create">@l.CreateNewButton</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.AccountBalance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserAlias)
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.AccountBalance)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AccountID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AccountID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AccountID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

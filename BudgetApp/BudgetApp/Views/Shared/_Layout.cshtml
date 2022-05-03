@@ -31,10 +31,6 @@
                              @l.BudgetButton 
                             </a>
                             <div class="dropdown-menu darker-bg" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="DimDates" asp-action="DimDateList">
-                                    <img src="~/img/bootstrap-icons-1.8.1/calendar-check.svg" aria-hidden="true"/>
-                                     Dates
-                                </a>
                                 <a class="dropdown-item" data-bs-toggle="dropdown" @*asp-controller="Categories" asp-action="CategoryList"*@>
                                     <img src="~/img/bootstrap-icons-1.8.1/calculator.svg" aria-hidden="true"/>
                                      @l.BudgetCreateButton
@@ -51,7 +47,11 @@
                             <img src="~/img/bootstrap-icons-1.8.1/gear.svg" aria-hidden="true"/>
                              @l.SettingsButton 
                             </a>
-                            <div class="dropdown-menu darker-bg" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu darker-bg" aria-labelledby="navbarDropdown">                                
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="DimDates" asp-action="DimDateList">
+                                    <img src="~/img/bootstrap-icons-1.8.1/calendar3.svg" aria-hidden="true"/>
+                                     Dates
+                                </a>
                                 <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="Categories" asp-action="CategoryList">
                                     <img src="~/img/bootstrap-icons-1.8.1/tag.svg" aria-hidden="true"/>
                                      @l.CategoryName
@@ -60,8 +60,20 @@
                                     <img src="~/img/bootstrap-icons-1.8.1/tags.svg" aria-hidden="true"/>
                                      @l.SubCategoryName
                                 </a>
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="Users" asp-action="Userlist">
+                                    <img src="~/img/bootstrap-icons-1.8.1/gear.svg" aria-hidden="true"/>
+                                     Userlist
+                                </a>
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="Accounts" asp-action="AccountList">
+                                    <img src="~/img/bootstrap-icons-1.8.1/gear.svg" aria-hidden="true"/>
+                                     Accountlist
+                                </a>
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="Trans" asp-action="TransactionList">
+                                    <img src="~/img/bootstrap-icons-1.8.1/gear.svg" aria-hidden="true"/>
+                                     Transactionlist
+                                </a>
                             </div>
-                        </li>
+                        </li>                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
