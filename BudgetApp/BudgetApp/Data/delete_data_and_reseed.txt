@@ -1,7 +1,0 @@
-﻿DELETE FROM Subcategory;
-DELETE FROM Category;
-DELETE FROM CategoryType;
-
-DBCC CHECKIDENT ('[Subcategory]', RESEED, 0);
-DBCC CHECKIDENT ('[Category]', RESEED, 0);
-DBCC CHECKIDENT ('[CategoryType]', RESEED, 0);
