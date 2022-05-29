@@ -17,8 +17,9 @@ namespace BudgetApp.Controllers
         // GET: CSV_model
         public IActionResult CSVlist()
         {
-            FileUpload fu = new FileUpload();
-            return View(fu.lines);
+            FileUpload fileContent = new FileUpload();
+            
+            return View(fileContent.fileLines);
         }
 
         private bool CSV_modelExists(int id)
