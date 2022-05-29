@@ -28,20 +28,20 @@ namespace BudgetApp.Data.Migrations
                 {
                     LineId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Bogføringsdato = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Beløb = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Afsender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Modtager = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Navn = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Beskrivelse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    SendingAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReceivingAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NameOfTransaction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Saldo = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    Valuta = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Afstemt = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionApproved = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CSV_model", x => x.LineId);
-                });
+                });            
 
             migrationBuilder.CreateTable(
                 name: "User",

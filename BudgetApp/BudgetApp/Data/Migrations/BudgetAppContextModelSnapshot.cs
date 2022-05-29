@@ -112,31 +112,31 @@ namespace BudgetApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LineId"), 1L, 1);
 
-                    b.Property<string>("Afsender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Afstemt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Beløb")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("Beskrivelse")
+                    b.Property<string>("Currency")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Bogføringsdato")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Modtager")
+                    b.Property<string>("NameOfTransaction")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Navn")
+                    b.Property<string>("ReceivingAccount")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Saldo")
                         .HasColumnType("decimal(12,2)");
 
-                    b.Property<string>("Valuta")
+                    b.Property<string>("SendingAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionApproved")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionDate")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LineId");
