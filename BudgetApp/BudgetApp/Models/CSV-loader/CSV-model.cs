@@ -8,16 +8,16 @@ namespace BudgetApp.Models.CSV_loader
     {
         [Key]
         public int LineId { get; set; }
-        public string Bogføringsdato { get; set; }
+        public string TransactionDate { get; set; }
         [Column(TypeName = "decimal(10, 2)")]
-        public decimal Beløb { get; set; }
-        public string Afsender { get; set; }
-        public string Modtager { get; set; }
-        public string Navn { get; set; }
-        public string Beskrivelse { get; set; }
+        public decimal Amount { get; set; }
+        public string SendingAccount { get; set; }
+        public string ReceivingAccount { get; set; }
+        public string NameOfTransaction { get; set; }
+        public string Description { get; set; }
         [Column(TypeName = "decimal(12, 2)")]
         public decimal Saldo { get; set; }
-        public string Valuta { get; set; }
-        public string Afstemt { get; set; }
+        public string Currency { get; set; }
+        public string TransactionApproved { get; set; }
     }
 }
