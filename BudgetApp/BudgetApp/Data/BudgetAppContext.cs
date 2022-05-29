@@ -19,6 +19,6 @@ namespace BudgetApp.Data
         public DbSet<DimDate> DimDate { get; set; }
         public DbSet<CSV_model> CSV_model { get; set; }
         public DbSet<Trans> Trans { get; set; }
-        public DbSet<BudgetApp.Models.User> User { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
