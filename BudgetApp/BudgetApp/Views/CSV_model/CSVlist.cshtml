@@ -8,28 +8,28 @@
     <thead>
         <tr>
             <th class="text-right">
-                @Html.DisplayNameFor(model => model.Bogføringsdato)
+                @Html.DisplayNameFor(model => model.TransactionDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Beskrivelse)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th class="text-right">
-                @Html.DisplayNameFor(model => model.Afsender)
+                @Html.DisplayNameFor(model => model.SendingAccount)
             </th>
             <th class="text-right">
-                @Html.DisplayNameFor(model => model.Modtager)
+                @Html.DisplayNameFor(model => model.ReceivingAccount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Navn)
+                @Html.DisplayNameFor(model => model.NameOfTransaction)
             </th>
             <th class="text-right">
-                @Html.DisplayNameFor(model => model.Beløb)
+                @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th class="text-right">
                 @Html.DisplayNameFor(model => model.Saldo)
             </th>
             <th class="text-right">
-                @Html.DisplayNameFor(model => model.Valuta)
+                @Html.DisplayNameFor(model => model.Currency)
             </th>
         </tr>
     </thead>
@@ -37,30 +37,30 @@
 @foreach (var item in Model) {
         <tr>
             <td class="text-right">
-                @Html.DisplayFor(modelItem => item.Bogføringsdato)
+                @Html.DisplayFor(modelItem => item.TransactionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Beskrivelse)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td class="text-right">
-                @Html.DisplayFor(modelItem => item.Afsender)
+                @Html.DisplayFor(modelItem => item.SendingAccount)
             </td>
             <td class="text-right">
-                @Html.DisplayFor(modelItem => item.Modtager)
+                @Html.DisplayFor(modelItem => item.ReceivingAccount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Navn)
+                @Html.DisplayFor(modelItem => item.NameOfTransaction)
             </td>           
             <td class="text-right 
-                @( item.Beløb > 0? "text-forest" : item.Beløb == 0? "text-black" : "text-red")">
-                @Html.DisplayFor(modelItem => item.Beløb)
+                @( item.Amount > 0? "text-forest" : item.Amount == 0? "text-black" : "text-red")">
+                @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td class="text-right
                 @( item.Saldo > 0? "text-forest" : item.Saldo == 0? "text-black" : "text-red")">
                 @Html.DisplayFor(modelItem => item.Saldo)
             </td>
             <td class="text-right">
-                @Html.DisplayFor(modelItem => item.Valuta)
+                @Html.DisplayFor(modelItem => item.Currency)
             </td>
         </tr>
 }
