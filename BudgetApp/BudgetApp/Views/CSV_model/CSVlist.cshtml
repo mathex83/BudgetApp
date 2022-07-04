@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<BudgetApp.Models.CSV_loader.CSV_model>
+@using BudgetApp.Models.CSV_loader
+@using System.Collections.Generic
 
 @{
     ViewData["Title"] = "CSVlist";
@@ -13,14 +15,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfTransaction)
+            </th>
             <th class="text-right">
                 @Html.DisplayNameFor(model => model.SendingAccount)
             </th>
             <th class="text-right">
                 @Html.DisplayNameFor(model => model.ReceivingAccount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NameOfTransaction)
             </th>
             <th class="text-right">
                 @Html.DisplayNameFor(model => model.Amount)
@@ -34,35 +36,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td class="text-right">
-                @Html.DisplayFor(modelItem => item.TransactionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td class="text-right">
-                @Html.DisplayFor(modelItem => item.SendingAccount)
-            </td>
-            <td class="text-right">
-                @Html.DisplayFor(modelItem => item.ReceivingAccount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameOfTransaction)
-            </td>           
-            <td class="text-right 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.TransactionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfTransaction)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.SendingAccount)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.ReceivingAccount)
+                </td>
+                <td class="text-right
                 @( item.Amount > 0? "text-forest" : item.Amount == 0? "text-black" : "text-red")">
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td class="text-right
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td class="text-right
                 @( item.Saldo > 0? "text-forest" : item.Saldo == 0? "text-black" : "text-red")">
-                @Html.DisplayFor(modelItem => item.Saldo)
-            </td>
-            <td class="text-right">
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-        </tr>
-}
+                    @Html.DisplayFor(modelItem => item.Saldo)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
