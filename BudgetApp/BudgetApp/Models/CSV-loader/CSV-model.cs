@@ -18,6 +18,6 @@ namespace BudgetApp.Models.CSV_loader
         [Column(TypeName = "decimal(12, 2)")]
         public decimal Saldo { get; set; }
         public string Currency { get; set; }
-        public string TransactionApproved { get; set; }
+        public string TransactionApproved { get; set; } = "";
     }
 }
