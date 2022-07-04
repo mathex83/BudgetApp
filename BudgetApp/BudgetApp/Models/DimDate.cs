@@ -9,6 +9,7 @@ namespace BudgetApp.Models
         [DataType(DataType.Date),Key]
         public DateTime DateISO { get; set; }
         public string DateDK { get; set; }
+        public string DateNordea { get; set; }
         public int WeekInt { get; set; }
         public int YearInt { get; set; }
         public int QuarterInt { get; set; }
@@ -16,6 +17,6 @@ namespace BudgetApp.Models
         public int DayInt { get; set; }
         public string DayNameEN { get; set; }
         public string DayNameDK { get; set; }
-        public int DayOfWeekInt { get; set; }
+        public int DanishDayOfWeekInt { get; set; }
     }
 }
