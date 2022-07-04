@@ -14,7 +14,7 @@ namespace BudgetApp.Models.CategoryModels
         public ICollection<Subcategory> Subcategories { get; set; }
         #endregion
 
-        #region CategoryCategoryType Foreign-end
+        #region CategoryCategoryTypeId Foreign-end
         public int CategoryTypeId { get; set; }
         public CategoryType CategoryType { get; set; }
         #endregion
