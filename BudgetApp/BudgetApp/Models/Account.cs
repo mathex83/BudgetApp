@@ -10,7 +10,7 @@ namespace BudgetApp.Models
         public int AccountID { get; set; }
         public string AccountName { get; set; }
         [Column(TypeName = "decimal(10, 2)")]
-        public decimal AccountBalance { get; set; }       
+        public decimal AccountBalance { get; set; }
 
         #region AccountUserId Foreign-end
         public int UserId { get; set; }
@@ -19,6 +19,10 @@ namespace BudgetApp.Models
 
         #region TransAccountId Primary-end
         public ICollection<Trans> Trans { get; set; }
+        #endregion
+
+        #region TransBudgetId Primary-end
+        public ICollection<Budget> Budgets { get; set; }
         #endregion
     }
 }

@@ -21,8 +21,8 @@ namespace BudgetApp.Models.CSV_loader
                     {
                         TransactionDate = lineSplit[0],
                         Amount = Convert.ToDecimal(lineSplit[1]),
-                        SendingAccount = lineSplit[2],
-                        ReceivingAccount = lineSplit[3],
+                        SendingAccount = lineSplit[3],
+                        ReceivingAccount = lineSplit[2],
                         Description = lineSplit[5],
                         Saldo = Convert.ToDecimal(lineSplit[6]),
                         Currency = lineSplit[7],

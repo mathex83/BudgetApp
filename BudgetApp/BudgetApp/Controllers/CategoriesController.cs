@@ -13,12 +13,17 @@ namespace BudgetApp.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly BudgetAppContext _context;
+        private readonly BudgetAppContext _context;       
         private readonly string modelName = "Category";
+        readonly LanguageControl l = new("DK");
+        private List<CategoryType> categoryType;
 
         public CategoriesController(BudgetAppContext context)
         {
             _context = context;
+            categoryType = _context.CategoryType.ToList();            
+            categoryType[0].CategoryTypeName = l.Income;
+            categoryType[1].CategoryTypeName = l.Expense;
         }
 
         // GET: Categories
@@ -28,9 +33,10 @@ namespace BudgetApp.Controllers
             List<Category> categories = await budgetAppContext.ToListAsync();
             //await _context.Category.ToListAsync();
             categories = categories
-                .OrderByDescending(ct => ct.CategoryType.CategoryTypeId)
+                .OrderBy(ct => ct.CategoryType.CategoryTypeId)
                 .ThenBy(c => c.CategoryId).ToList();
-            ViewData["Title"] = modelName + "-list";
+
+            ViewData["Title"] = " \"" + modelName + "\"" + l.list;
             return View(categories);
         }
 
@@ -38,10 +44,11 @@ namespace BudgetApp.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryTypeId"] = new SelectList(
-                _context.CategoryType, 
+                categoryType, 
                 "CategoryTypeId",
-                "CategoryTypeName");
-            ViewData["Title"] = "Create new " + modelName;
+                "CategoryTypeName",
+                1);
+            ViewData["Title"] = l.CreateNewButton + " \"" + modelName + "\"";
             return View();
         }
 
@@ -60,7 +67,7 @@ namespace BudgetApp.Controllers
                 return RedirectToAction(nameof(CategoryList));
             }
             ViewData["CategoryTypeId"] = new SelectList(
-                _context.CategoryType,
+                categoryType,
                 "CategoryTypeId",
                 "CategoryTypeName",
                 category.CategoryTypeId);
@@ -70,7 +77,6 @@ namespace BudgetApp.Controllers
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewData["Title"] = "Edit " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -82,10 +88,12 @@ namespace BudgetApp.Controllers
                 return NotFound();
             }
             ViewData["CategoryTypeId"] = new SelectList(
-                _context.CategoryType,
+                categoryType,
                 "CategoryTypeId",
                 "CategoryTypeName",
                 category.CategoryTypeId);
+
+            ViewData["Title"] = l.EditButton + " \"" + modelName + "\"";
             return View(category);
         }
 
@@ -124,7 +132,7 @@ namespace BudgetApp.Controllers
                 return RedirectToAction(nameof(CategoryList));
             }
             ViewData["CategoryTypeId"] = new SelectList(
-                _context.CategoryType,
+                categoryType,
                 "CategoryTypeId",
                 "CategoryTypeName",
                 category.CategoryTypeId);
@@ -134,7 +142,6 @@ namespace BudgetApp.Controllers
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            ViewData["Title"] = "Delete " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -148,6 +155,7 @@ namespace BudgetApp.Controllers
                 return NotFound();
             }
 
+            ViewData["Title"] = l.DeleteButton + " \"" + modelName + "\"";
             return View(category);
         }
 

@@ -46,6 +46,38 @@ namespace BudgetApp.Data.Migrations
                     b.ToTable("Account");
                 });
 
+            modelBuilder.Entity("BudgetApp.Models.Budget", b =>
+                {
+                    b.Property<int>("BudgetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BudgetId"), 1L, 1);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BudgetMonth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BudgetYear")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BudgetId");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("Budget");
+                });
+
             modelBuilder.Entity("BudgetApp.Models.CategoryModels.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -65,6 +97,56 @@ namespace BudgetApp.Data.Migrations
                     b.HasIndex("CategoryTypeId");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Fast overførsel",
+                            CategoryTypeId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Penge tilbage",
+                            CategoryTypeId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Anden overførsel",
+                            CategoryTypeId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Bolig",
+                            CategoryTypeId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Bil",
+                            CategoryTypeId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Forsikring",
+                            CategoryTypeId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Tlf/Internet/TV",
+                            CategoryTypeId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Streaming",
+                            CategoryTypeId = 2
+                        });
                 });
 
             modelBuilder.Entity("BudgetApp.Models.CategoryModels.CategoryType", b =>
@@ -81,6 +163,18 @@ namespace BudgetApp.Data.Migrations
                     b.HasKey("CategoryTypeId");
 
                     b.ToTable("CategoryType");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryTypeId = 1,
+                            CategoryTypeName = "Income"
+                        },
+                        new
+                        {
+                            CategoryTypeId = 2,
+                            CategoryTypeName = "Expense"
+                        });
                 });
 
             modelBuilder.Entity("BudgetApp.Models.CategoryModels.Subcategory", b =>
@@ -149,7 +243,13 @@ namespace BudgetApp.Data.Migrations
                     b.Property<DateTime>("DateISO")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DanishDayOfWeekInt")
+                        .HasColumnType("int");
+
                     b.Property<string>("DateDK")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateNordea")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DayInt")
@@ -160,9 +260,6 @@ namespace BudgetApp.Data.Migrations
 
                     b.Property<string>("DayNameEN")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DayOfWeekInt")
-                        .HasColumnType("int");
 
                     b.Property<int>("MonthInt")
                         .HasColumnType("int");
@@ -237,6 +334,25 @@ namespace BudgetApp.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BudgetApp.Models.Budget", b =>
+                {
+                    b.HasOne("BudgetApp.Models.Account", "Account")
+                        .WithMany("Budgets")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BudgetApp.Models.CategoryModels.Subcategory", "Subcategory")
+                        .WithMany("Budgets")
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Subcategory");
+                });
+
             modelBuilder.Entity("BudgetApp.Models.CategoryModels.Category", b =>
                 {
                     b.HasOne("BudgetApp.Models.CategoryModels.CategoryType", "CategoryType")
@@ -280,6 +396,8 @@ namespace BudgetApp.Data.Migrations
 
             modelBuilder.Entity("BudgetApp.Models.Account", b =>
                 {
+                    b.Navigation("Budgets");
+
                     b.Navigation("Trans");
                 });
 
@@ -295,6 +413,8 @@ namespace BudgetApp.Data.Migrations
 
             modelBuilder.Entity("BudgetApp.Models.CategoryModels.Subcategory", b =>
                 {
+                    b.Navigation("Budgets");
+
                     b.Navigation("Trans");
                 });
 

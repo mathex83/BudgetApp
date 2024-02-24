@@ -1,7 +1,6 @@
-﻿@model BudgetApp.Models.Trans
+﻿@model BudgetApp.Models.Budget
 @*Set the language*@
 @{LanguageControl l = new LanguageControl("DK");}
-
 @{
     ViewData["Title"] = @l.CreateNewButton;
 }
@@ -11,9 +10,14 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label">@l.Description</label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="BudgetYear" class="control-label">@l.BudgetYear</label>
+                <input asp-for="BudgetYear" class="form-control" />
+                <span asp-validation-for="BudgetYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BudgetMonth" class="control-label">@l.BudgetMonth</label>
+                <input asp-for="BudgetMonth" class="form-control" />
+                <span asp-validation-for="BudgetMonth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label">@l.Amount</label>
@@ -21,22 +25,25 @@
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AccountId" class="control-label">@l.AccountName</label>
-                <select asp-for="AccountId" class ="form-control" asp-items="ViewBag.AccountId"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="SubCategoryId" class="control-label">@l.SubCategoryName</label>
                 <select asp-for="SubCategoryId" class ="form-control" asp-items="ViewBag.SubCategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="@l.CreateButton" class="btn btn-primary" />
+                <label asp-for="AccountId" class="control-label">@l.AccountName</label>
+                <select asp-for="AccountId" class ="form-control" asp-items="ViewBag.AccountId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@l.CreateButton class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="TransactionList">@l.BackToList</a>
+    <a asp-action="SubcategoryList">
+        <img src="~/img/bootstrap-icons-1.8.1/arrow-left.svg" aria-hidden="true"/> 
+        @l.BackToList
+    </a>
 </div>
 
 @section Scripts {

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BudgetApp.Models.Budget>
+@*Set the language*@
+@{LanguageControl l = new LanguageControl("DK");}
+@{
+    ViewData["Title"] = "BudgetList";
+}
+
+<h1>BudgetList</h1>
+
+<p>
+    <a asp-action="Create">@l.CreateNewButton</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@l.BudgetYear</th>
+            <th>@l.BudgetMonth</th>
+            <th class="text-right">@l.Amount</th>
+            <th>@l.SubCategoryName</th>
+            <th>@l.AccountName</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BudgetYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BudgetMonth)
+            </td>
+            <td class="text-right
+                @( item.Amount > 0? "text-forest" : item.Amount == 0? "text-black" : "text-red")">
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subcategory.SubcategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.AccountName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BudgetId">
+                    <img src="~/img/bootstrap-icons-1.8.1/pencil.svg" aria-hidden="true"
+                    alt="@l.EditButton"/>
+                     @*@l.EditButton*@
+                </a> |
+                 <a asp-action="Details" asp-route-id="@item.BudgetId">
+                     <img src="~/img/bootstrap-icons-1.8.1/trash3.svg" aria-hidden="true"
+                     alt="@l.DetailsButton"/>
+                     @*@l.DeleteButton*@
+                 </a> |
+                 <a asp-action="Delete" asp-route-id="@item.BudgetId">
+                     <img src="~/img/bootstrap-icons-1.8.1/trash3.svg" aria-hidden="true"
+                     alt="@l.DeleteButton"/>
+                     @*@l.DeleteButton*@
+                 </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

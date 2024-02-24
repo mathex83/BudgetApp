@@ -3,7 +3,7 @@
 @{LanguageControl l = new LanguageControl("DK");}
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = @l.CreateNewButton;
 }
 
 <div class="row">
@@ -11,28 +11,31 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="AccountName" class="control-label"></label>
+                <label asp-for="AccountName" class="control-label">@l.AccountName</label>
                 <input asp-for="AccountName" class="form-control" />
                 <span asp-validation-for="AccountName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AccountBalance" class="control-label"></label>
+                <label asp-for="AccountBalance" class="control-label">@l.AccountBalance</label>
                 <input asp-for="AccountBalance" class="form-control" />
                 <span asp-validation-for="AccountBalance" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
+                <label asp-for="UserId" class="control-label">@l.UserId</label>
                 <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="@l.CreateButton" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="AccountList">@l.BackToList</a>
+    <a asp-action="AccountList">
+        <img src="~/img/bootstrap-icons-1.8.1/arrow-left.svg" aria-hidden="true"/> 
+        @l.BackToList
+    </a>
 </div>
 
 @section Scripts {

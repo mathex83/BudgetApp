@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BudgetApp.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,28 @@ namespace BudgetApp.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CSV_model", x => x.LineId);
-                });            
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DimDate",
+                columns: table => new
+                {
+                    DateISO = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateDK = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateNordea = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WeekInt = table.Column<int>(type: "int", nullable: false),
+                    YearInt = table.Column<int>(type: "int", nullable: false),
+                    QuarterInt = table.Column<int>(type: "int", nullable: false),
+                    MonthInt = table.Column<int>(type: "int", nullable: false),
+                    DayInt = table.Column<int>(type: "int", nullable: false),
+                    DayNameEN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DayNameDK = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DanishDayOfWeekInt = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DimDate", x => x.DateISO);
+                });
 
             migrationBuilder.CreateTable(
                 name: "User",
@@ -118,6 +139,35 @@ namespace BudgetApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Budget",
+                columns: table => new
+                {
+                    BudgetId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BudgetYear = table.Column<int>(type: "int", nullable: false),
+                    BudgetMonth = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false),
+                    AccountId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Budget", x => x.BudgetId);
+                    table.ForeignKey(
+                        name: "FK_Budget_Account_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Account",
+                        principalColumn: "AccountID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Budget_Subcategory_SubCategoryId",
+                        column: x => x.SubCategoryId,
+                        principalTable: "Subcategory",
+                        principalColumn: "SubcategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Trans",
                 columns: table => new
                 {
@@ -145,10 +195,45 @@ namespace BudgetApp.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "CategoryType",
+                columns: new[] { "CategoryTypeId", "CategoryTypeName" },
+                values: new object[] { 1, "Income" });
+
+            migrationBuilder.InsertData(
+                table: "CategoryType",
+                columns: new[] { "CategoryTypeId", "CategoryTypeName" },
+                values: new object[] { 2, "Expense" });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryId", "CategoryName", "CategoryTypeId" },
+                values: new object[,]
+                {
+                    { 1, "Fast overførsel", 1 },
+                    { 2, "Penge tilbage", 1 },
+                    { 3, "Anden overførsel", 1 },
+                    { 4, "Bolig", 2 },
+                    { 5, "Bil", 2 },
+                    { 6, "Forsikring", 2 },
+                    { 7, "Tlf/Internet/TV", 2 },
+                    { 8, "Streaming", 2 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Account_UserId",
                 table: "Account",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Budget_AccountId",
+                table: "Budget",
+                column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Budget_SubCategoryId",
+                table: "Budget",
+                column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Category_CategoryTypeId",
@@ -174,7 +259,13 @@ namespace BudgetApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Budget");
+
+            migrationBuilder.DropTable(
                 name: "CSV_model");
+
+            migrationBuilder.DropTable(
+                name: "DimDate");
 
             migrationBuilder.DropTable(
                 name: "Trans");

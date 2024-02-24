@@ -11,18 +11,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Account)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subcategory)
-            </th>
-            <th class="text-right">
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
+            <th>@l.Description</th>
+            <th>@l.AccountName</th>
+            <th>@l.SubCategoryName</th>
+            <th class="text-right">@l.Amount</th>
             <th></th>
         </tr>
     </thead>
@@ -38,13 +30,24 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Subcategory.SubcategoryName)
             </td>
-            <td class="text-right">
+            <td class="text-right
+                @( item.Amount > 0? "text-forest" : item.Amount == 0? "text-black" : "text-red")">
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TransId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TransId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TransId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.TransId">
+                    <img src="~/img/bootstrap-icons-1.8.1/pencil.svg" aria-hidden="true"/>
+                     @*@l.EditButton*@
+                </a> |
+                 <a asp-action="Details" asp-route-id="@item.TransId">
+                     <img src="~/img/bootstrap-icons-1.8.1/trash3.svg" aria-hidden="true"
+                     alt="@l.DetailsButton"/>
+                     @*@l.DeleteButton*@
+                 </a> |
+                 <a asp-action="Delete" asp-route-id="@item.TransId">
+                     <img src="~/img/bootstrap-icons-1.8.1/trash3.svg" aria-hidden="true"/>
+                     @*@l.DeleteButton*@
+                 </a>
             </td>
         </tr>
 }

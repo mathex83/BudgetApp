@@ -14,6 +14,7 @@ namespace BudgetApp.Controllers
     public class SubcategoriesController : Controller
     {
         private readonly BudgetAppContext _context;
+        readonly LanguageControl l = new("DK");
         private readonly string modelName = "Sub-category";
 
         public SubcategoriesController(BudgetAppContext context)
@@ -32,7 +33,7 @@ namespace BudgetApp.Controllers
                 .ThenBy(sc => sc.Category.CategoryId)
                 .ThenBy(sc => sc.SubcategoryName)
                 .ToList();
-            ViewData["Title"] = modelName + "-list";
+            ViewData["Title"] = " \"" + modelName + "\"" + l.list;
             return View(subcategories);
         }
 
@@ -43,7 +44,7 @@ namespace BudgetApp.Controllers
                 _context.Category, 
                 "CategoryId", 
                 "CategoryName");
-            ViewData["Title"] = "Create new " + modelName;
+            ViewData["Title"] = l.CreateNewButton + " \"" + modelName + "\"";
             return View();
         }
 
@@ -72,7 +73,6 @@ namespace BudgetApp.Controllers
         // GET: Subcategories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewData["Title"] = "Edit " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +88,8 @@ namespace BudgetApp.Controllers
                 "CategoryId",
                 "CategoryName",
                 subcategory.CategoryId);
+
+            ViewData["Title"] = l.EditButton + " \"" + modelName + "\"";
             return View(subcategory);
         }
 
@@ -136,7 +138,6 @@ namespace BudgetApp.Controllers
         // GET: Subcategories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            ViewData["Title"] = "Delete " + modelName;
             if (id == null)
             {
                 return NotFound();
@@ -150,6 +151,7 @@ namespace BudgetApp.Controllers
                 return NotFound();
             }
 
+            ViewData["Title"] = l.DeleteButton + " \"" + modelName + "\"";
             return View(subcategory);
         }
 

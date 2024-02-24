@@ -19,5 +19,9 @@ namespace BudgetApp.Models.CategoryModels
         #region TransSubCategoryId Primary-end
         public ICollection<Trans> Trans { get; set; }
         #endregion
+
+        #region BudgetSubCategoryId Primary-end
+        public ICollection<Budget> Budgets { get; set; }
+        #endregion
     }
 }

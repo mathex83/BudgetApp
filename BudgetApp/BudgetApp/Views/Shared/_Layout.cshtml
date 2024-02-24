@@ -31,11 +31,11 @@
                              @l.BudgetButton 
                             </a>
                             <div class="dropdown-menu darker-bg" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" data-bs-toggle="dropdown" @*asp-controller="Categories" asp-action="CategoryList"*@>
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="Budgets" asp-action="Create">
                                     <img src="~/img/bootstrap-icons-1.8.1/calculator.svg" aria-hidden="true"/>
                                      @l.BudgetCreateButton
                                 </a>
-                                <a class="dropdown-item" data-bs-toggle="dropdown" @*asp-controller="Categories" asp-action="CategoryList"*@>
+                                <a class="dropdown-item" data-bs-toggle="dropdown" asp-controller="Budgets" asp-action="BudgetList">
                                     <img src="~/img/bootstrap-icons-1.8.1/table.svg" aria-hidden="true"/>
                                      @l.BudgetViewButton
                                 </a> 

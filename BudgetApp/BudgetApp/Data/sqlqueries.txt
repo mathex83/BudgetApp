@@ -9,18 +9,18 @@ DBCC CHECKIDENT ('[CategoryType]', RESEED, 0);
 DBCC CHECKIDENT ('[Account]', RESEED, 0);
 
 
-INSERT INTO [dbo].[CategoryType] ([CategoryTypeName]) VALUES (N'Indtægt');
-INSERT INTO [dbo].[CategoryType] ([CategoryTypeName]) VALUES (N'Udgift');
+--INSERT INTO [dbo].[CategoryType] ([CategoryTypeName]) VALUES (N'Indtægt');
+--INSERT INTO [dbo].[CategoryType] ([CategoryTypeName]) VALUES (N'Udgift');
 
-SET IDENTITY_INSERT [dbo].[Category] ON
-INSERT INTO [dbo].[Category] ([CategoryId],[CategoryName],[CategoryTypeId]) VALUES (1,N'Bolig', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
-SET IDENTITY_INSERT [dbo].[Category] OFF
-INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Bil', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
-INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'TV/Internet/Mobil', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
-INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Streaming', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
-INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Forsikring', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
-INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Budgetoverførsel', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Indtægt'));
-INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Anden overførsel', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Indtægt'));
+--SET IDENTITY_INSERT [dbo].[Category] ON
+--INSERT INTO [dbo].[Category] ([CategoryId],[CategoryName],[CategoryTypeId]) VALUES (1,N'Bolig', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
+--SET IDENTITY_INSERT [dbo].[Category] OFF
+--INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Bil', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
+--INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'TV/Internet/Mobil', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
+--INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Streaming', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
+--INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Forsikring', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Udgift'));
+--INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Budgetoverførsel', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Indtægt'));
+--INSERT INTO [dbo].[Category] ([CategoryName],[CategoryTypeId]) VALUES (N'Anden overførsel', (SELECT CategoryTypeId FROM CategoryType WHERE CategoryTypeName=N'Indtægt'));
 
 INSERT INTO [dbo].[Subcategory] ([SubcategoryName], [CategoryId]) VALUES (N'Boliglån i kreditforening', (SELECT CategoryId FROM Category WHERE CategoryName=N'Bolig'));
 INSERT INTO [dbo].[Subcategory] ([SubcategoryName], [CategoryId]) VALUES (N'Boliglån i banken', (SELECT CategoryId FROM Category WHERE CategoryName=N'Bolig'));
